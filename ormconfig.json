@@ -1,0 +1,10 @@
+{
+  "type": "mssql",
+  "host": "ih-coeus",
+  "port": 1433,
+  "username": "web",
+  "password": "web",
+  "database": "server_boilerplate",
+  "entities": ["src/**/*.entity{.ts,.js}"],
+  "synchronize": true
+}
