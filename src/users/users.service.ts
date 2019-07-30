@@ -14,6 +14,10 @@ export class UsersService {
     return this.userRepository.insert(user)
   }
 
+  delete(id: number) {
+    return this.userRepository.delete({ id })
+  }
+
   findOne(id: number): Promise<User> {
     return this.userRepository.findOne(id)
   }
