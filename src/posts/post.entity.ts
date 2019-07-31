@@ -32,6 +32,6 @@ export class Post {
   updatedAt: Date
 
   @ApiModelProperty()
-  @Column({ type: 'nvarchar', length: 'max' })
-  content: string
+  @Column({ type: 'nvarchar', length: 'max', nullable: true })
+  content?: string
 }

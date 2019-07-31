@@ -10,19 +10,30 @@ export class UsersService {
     private readonly userRepository: Repository<User>,
   ) {}
 
-  create(user: User) {
-    return this.userRepository.insert(user)
+  async getCount(): Promise<number> {
+    return await this.userRepository.count()
   }
 
-  delete(id: number) {
-    return this.userRepository.delete({ id })
+  async create(user: User) {
+    const newUser = this.userRepository.create(user)
+    return await this.userRepository.save(newUser)
   }
 
-  findOne(id: number): Promise<User> {
-    return this.userRepository.findOne(id)
+  async update(id: number, update: Partial<User>) {
+    const user = await this.userRepository.findOne(id)
+    const updatedUser = this.userRepository.merge(user, update)
+    return await this.userRepository.save(updatedUser)
   }
 
-  findAll(): Promise<User[]> {
-    return this.userRepository.find()
+  async delete(id: number) {
+    return await this.userRepository.delete({ id })
+  }
+
+  async findOne(id: number): Promise<User> {
+    return await this.userRepository.findOne(id)
+  }
+
+  async findAll(): Promise<User[]> {
+    return await this.userRepository.find()
   }
 }
