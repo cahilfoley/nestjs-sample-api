@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common'
 import { TypeOrmModule } from '@nestjs/typeorm'
+import { GraphQLModule } from '@nestjs/graphql'
 import { AppController } from './app.controller'
 import { AppService } from './app.service'
 import { UsersModule } from './users/users.module'
@@ -17,9 +18,14 @@ import { PostsModule } from './posts/posts.module'
       database: 'server_boilerplate',
       entities: [join(__dirname, '**/*.entity{.ts,.js}')],
       synchronize: true,
+      cache: true,
     }),
     UsersModule,
     PostsModule,
+    GraphQLModule.forRoot({
+      autoSchemaFile: 'schema.gql',
+      installSubscriptionHandlers: true,
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

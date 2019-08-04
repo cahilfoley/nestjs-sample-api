@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { User } from './user.entity'
+import { CreateUserInput } from './dto/create-user.input'
 
 @Injectable()
 export class UsersService {
@@ -14,7 +15,7 @@ export class UsersService {
     return await this.userRepository.count()
   }
 
-  async create(user: User) {
+  async create(user: CreateUserInput) {
     const newUser = this.userRepository.create(user)
     return await this.userRepository.save(newUser)
   }

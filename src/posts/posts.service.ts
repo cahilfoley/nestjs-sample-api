@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm'
 import { Post } from './post.entity'
 import { Repository } from 'typeorm'
 import { UsersService } from '../users/users.service'
-import { CreatePostDTO } from './dto/create-post.dto'
+import { CreatePostInput } from './dto/create-post.input'
 
 @Injectable()
 export class PostsService {
@@ -14,12 +14,12 @@ export class PostsService {
     private readonly usersService: UsersService,
   ) {}
 
-  async create(createPostDTO: CreatePostDTO) {
+  async create(createPostInput: CreatePostInput) {
     const post = new Post()
 
-    post.title = createPostDTO.title
-    post.content = createPostDTO.content
-    post.author = await this.usersService.findOne(createPostDTO.author)
+    post.title = createPostInput.title
+    post.content = createPostInput.content
+    post.author = await this.usersService.findOne(createPostInput.author)
 
     return await this.postRepository.save(post)
   }

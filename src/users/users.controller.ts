@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common'
 import { UsersService } from './users.service'
 import { User } from './user.entity'
+import { CreateUserInput } from './dto/create-user.input'
 import { ApiUseTags, ApiOperation } from '@nestjs/swagger'
 
 @ApiUseTags('users')
@@ -18,7 +19,7 @@ export class UsersController {
 
   @Post()
   @ApiOperation({ title: 'Create user' })
-  create(@Body() user: User) {
+  create(@Body() user: CreateUserInput) {
     this.usersService.create(user)
   }
 
